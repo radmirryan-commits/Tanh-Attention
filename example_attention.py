@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
 
-class TanhTtention(nn.Module):
+class TanhAttention(nn.Module):
     def __init__(self, d_model=256):
         super().__init__()
         self.W_Q_h1 = nn.Parameter(torch.randn(d_model, d_model//4).uniform_(-1/d_model, 1/d_model))
@@ -55,7 +55,7 @@ class TanhTtention(nn.Module):
             matrix_new.append(vec)
         matrix = torch.stack(matrix_new, dim=1)
         matrix = matrix *mask.unsqueeze(0)
-        matrix = self.Sigmoid(matrix)
+        matrix = self.Tanh(matrix)
         matrix_h2 = matrix@x_v
 
         #head3
@@ -74,7 +74,7 @@ class TanhTtention(nn.Module):
             matrix_new.append(vec)
         matrix = torch.stack(matrix_new, dim=1)
         matrix = matrix *mask.unsqueeze(0)
-        matrix = self.Sigmoid(matrix)
+        matrix = self.Tanh(matrix)
         matrix_h3 = matrix@x_v
 
         #head4
@@ -93,7 +93,7 @@ class TanhTtention(nn.Module):
             matrix_new.append(vec)
         matrix = torch.stack(matrix_new, dim=1)
         matrix = matrix *mask.unsqueeze(0)
-        matrix = self.Sigmoid(matrix)
+        matrix = self.Tanh(matrix)
         matrix_h4 = matrix@x_v
 
 
